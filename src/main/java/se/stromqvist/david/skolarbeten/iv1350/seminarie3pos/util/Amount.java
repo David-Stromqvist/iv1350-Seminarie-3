@@ -10,7 +10,8 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util;
  * Instances are immutable.
  */
 public class Amount {
-	
+    private static final double EPSILON = 0.0001;
+    
     private final AmountENUM type;
     private final double amount;
 
@@ -97,7 +98,7 @@ public class Amount {
             return false;
         }
         
-        return amount == otherAmount.amount; 
+        return EPSILON >= (Math.abs(amount - otherAmount.amount)); 
     }
 
 
