@@ -1,8 +1,7 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller;
 
-import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.DatabaseHandler;
-import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.Printer;
-import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.Register;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.*;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model.*;
 
 /**
  * Used to manage all communication between layers in the POS project.
@@ -13,6 +12,7 @@ public class Controller {
     private DatabaseHandler database;
     private Printer printer;
     private Register register;
+    private Sale currentSale = null;
     
     public Controller (DatabaseHandler database, Printer printer)
     {
@@ -22,5 +22,8 @@ public class Controller {
         register = new Register();
     }
     
-    
+    public void startNewSale()
+    {
+        currentSale = new Sale();
+    }
 }

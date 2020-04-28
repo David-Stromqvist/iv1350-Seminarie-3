@@ -7,6 +7,7 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util;
  * @author David
  * 
  * Used to specify the quantity and kind of amount of an item.
+ * Instances are immutable.
  */
 public class Amount {
 	
@@ -80,6 +81,23 @@ public class Amount {
     public Amount addAmount(double amount)
     {
         return new Amount( (this.amount + amount), type);
+    }
+    
+    @Override
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof Amount))
+        {
+            return false;
+        }
+        Amount otherAmount = (Amount) other;
+        
+        if (type != otherAmount.type)
+        {
+            return false;
+        }
+        
+        return amount == otherAmount.amount; 
     }
 
 

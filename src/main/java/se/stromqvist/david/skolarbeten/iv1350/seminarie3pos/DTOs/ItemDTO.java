@@ -12,10 +12,10 @@ public class ItemDTO {
     public final int itemIdentifier;
     public final String itemDescription;
     public final BigDecimal price;
-    public final float VATrate;
+    public final double VATrate;
     private final AmountENUM type;
 
-    public ItemDTO(int itemIdentifier, String itemDescription, BigDecimal price, float VATrate, AmountENUM type)
+    public ItemDTO(int itemIdentifier, String itemDescription, BigDecimal price, double VATrate, AmountENUM type)
     {
         this.itemIdentifier  = itemIdentifier;
         this.itemDescription = itemDescription;
