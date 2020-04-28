@@ -2,7 +2,6 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
@@ -15,12 +14,14 @@ class Basket {
     
     private final ArrayList<Item> items;
     private BigDecimal totalPrice;
+    private BigDecimal totalPriceWithoutVAT;
     private BigDecimal totalVAT;
     
     Basket()
     {
         items = new ArrayList();
         totalPrice = new BigDecimal("0.00");
+        totalPriceWithoutVAT = new BigDecimal("0.00");
         totalVAT = new BigDecimal("0.00");
     }
     
@@ -38,6 +39,7 @@ class Basket {
         increaseTotalVATandPrice(newItem.price, newItem.VATrate, amount);
     }
 
+    
     private BigDecimal calculatePrice(BigDecimal price, Amount amount) 
     {
         BigDecimal amountToMultiply = BigDecimal.valueOf(amount.getAmount());
@@ -47,14 +49,37 @@ class Basket {
     private void increaseTotalVATandPrice(BigDecimal price, double vatRate, Amount amount)
     {
         BigDecimal newPriceIncrease = calculatePrice(price, amount);
-        totalPrice = totalPrice.add(newPriceIncrease);
+        totalPriceWithoutVAT = totalPriceWithoutVAT.add(newPriceIncrease);
         BigDecimal newVATIncrease = calculateNewVATIncrease(newPriceIncrease, vatRate);
         totalVAT = totalVAT.add(newVATIncrease);
+        totalPrice = totalPrice.add(newVATIncrease);
+        totalPrice = totalPrice.add(newPriceIncrease);
     }
 
     private BigDecimal calculateNewVATIncrease(BigDecimal newPriceIncrease, double vatRate)
     {
         BigDecimal VATRateIncrease = BigDecimal.valueOf(vatRate/100);
         return newPriceIncrease.multiply(VATRateIncrease);
+    }
+    
+    BigDecimal getTotalPrice()
+    {
+        return totalPrice;
+    }
+    
+    BigDecimal getTotalPriceWithoutVAT()
+    {
+        return totalPriceWithoutVAT;
+    }
+    
+    BigDecimal getTotalVAT()
+    {
+        return totalVAT;
+    }
+    
+    Item[] getItemArray()
+    {
+        Item[] itemArray = new Item[1];
+        return items.toArray(itemArray);
     }
 }
