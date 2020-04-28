@@ -28,7 +28,7 @@ public class AmountTest {
         System.out.println("getType");
         AmountENUM expResult = AmountENUM.NUMBER;
         AmountENUM result = instance.getType();
-        assertEquals(expResult, result, "Wrong type");
+        assertEquals(expResult, result);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AmountTest {
         System.out.println("getAmount");
         double expResult = 10.0;
         double result = instance.getAmount();
-        assertEquals(expResult, result, "Wrong amount");
+        assertEquals(expResult, result, 0.001);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class AmountTest {
         double amount = 0.0;
         Amount expResult = new Amount(0.0, AmountENUM.NUMBER);
         Amount result = instance.setAmount(amount);
-        assertEquals(expResult, result, "Set Amount failed");
+        assertEquals(expResult, result);
         //assertEquals(expResult.getAmount(), result.getAmount());
         //assertEquals(expResult.getType(), result.getType());
     }
@@ -56,7 +56,7 @@ public class AmountTest {
         Amount amountToAdd = new Amount(20.0, AmountENUM.NUMBER);
         Amount expResult = new Amount(30.0, AmountENUM.NUMBER);
         Amount result = instance.addAmount(amountToAdd);
-        assertEquals(expResult, result, "Amount added wrong");
+        assertEquals(expResult, result);
         //assertEquals(expResult.getAmount(), result.getAmount());
         //assertEquals(expResult.getType(), result.getType());
     }
@@ -67,7 +67,7 @@ public class AmountTest {
         Amount amountToAdd = new Amount(20.0, AmountENUM.SIZE);
         Amount expResult = null;
         Amount result = instance.addAmount(amountToAdd);
-        assertEquals(expResult, result, "Failed wrong, null not returned");
+        assertEquals(expResult, result);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class AmountTest {
         double amount = 20.0;
         Amount expResult = new Amount(30.0, AmountENUM.NUMBER);
         Amount result = instance.addAmount(amount);
-        assertEquals(expResult, result, "Adding double failed");
+        assertEquals(expResult, result);
         //assertEquals(expResult.getAmount(), result.getAmount());
         //assertEquals(expResult.getType(), result.getType());
     }
