@@ -66,7 +66,7 @@ public class Controller {
         register.logSale(saleInfo);
         database.reportSale(saleInfo, storeInfo);
         printer.printRecipt(saleInfo, storeInfo);
-        
+        finishedSale = null;
         return saleInfo;
     }
     
