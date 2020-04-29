@@ -31,7 +31,7 @@ public class DatabaseHandler {
     public ItemDTO getItem(int itemIdentifier) 
     {
         int itemNR = itemIdentifier - 100;
-        if (itemNR < MAX_NUMBER_OF_ITEMS)
+        if (itemNR < MAX_NUMBER_OF_ITEMS && 0 <= itemNR)
             return items[itemNR];
         else
             return null;
@@ -39,6 +39,7 @@ public class DatabaseHandler {
 
     /**
      * Gets the stores information
+     * in reality this would be read from a file.
      * @return store information
      */
     public StoreInfoDTO getStoreInfo() 

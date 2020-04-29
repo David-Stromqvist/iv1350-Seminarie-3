@@ -23,7 +23,7 @@ public class Sale {
 
     /**
      * 
-     * @return the current total price of the sale formated to show2 decimal places
+     * @return the current total price of the sale formated to show 2 decimal places
      */
     public BigDecimal getTotalPrice() 
     {
