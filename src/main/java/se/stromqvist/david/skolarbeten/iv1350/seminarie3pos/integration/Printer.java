@@ -22,25 +22,7 @@ public class Printer {
      */
     public void printRecipt(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) 
     {
-        System.out.println(createReciptString(saleInfo, storeInfo));
-    }
-    
-    private String createReciptString(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo)
-    {
-        StringBuilder reciptString = new StringBuilder();
-        addLine(storeInfo.storeName, reciptString);
-        addLine(storeInfo.adress, reciptString);
-        
-        return reciptString.toString();
-    }
-    
-    private void addItem(SoldItemDTO item, StringBuilder reciptString)
-    {
-        
-    }
-    
-    private void addLine(String lineToAdd, StringBuilder reciptString)
-    {
-        
+        Recipt recipt = new Recipt(saleInfo, storeInfo);
+        System.out.println(recipt.toString());
     }
 }
