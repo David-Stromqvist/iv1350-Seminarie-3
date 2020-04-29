@@ -1,5 +1,10 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.startUp;
 
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.Controller;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.DatabaseHandler;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.Printer;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.view.View;
+
 /**
  *
  * @author David
@@ -10,8 +15,14 @@ public class Main {
      * @param args the command line arguments
      * this program doesn't have any.
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args)
+    {
+        DatabaseHandler database = new DatabaseHandler();
+        Printer printer = new Printer();
+        Controller cntr = new Controller(database, printer);
+        View view = new View(cntr);
+        
+        view.runPointOfSale();
     }
     
 }
