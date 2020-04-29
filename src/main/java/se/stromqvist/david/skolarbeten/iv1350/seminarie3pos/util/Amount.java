@@ -84,6 +84,13 @@ public class Amount {
         return new Amount( (this.amount + amount), type);
     }
     
+    /**
+     * Compares two Amount objects, they need to have the same AmountENUM type
+     * and the difference of the double amounts needs to be less than EPSILON.
+     * 
+     * @param other the object to be compared.
+     * @return true if they are the same type with a quantity difference less than EPSILON
+     */
     @Override
     public boolean equals(Object other)
     {
