@@ -1,6 +1,7 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
@@ -22,11 +23,11 @@ public class Sale {
 
     /**
      * 
-     * @return the current total price of the sale.
+     * @return the current total price of the sale formated to show2 decimal places
      */
     public BigDecimal getTotalPrice() 
     {
-        return basket.getTotalPrice();
+        return basket.getTotalPrice().setScale(2, RoundingMode.HALF_UP);
     }
 
     /**
