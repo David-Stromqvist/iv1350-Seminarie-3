@@ -63,7 +63,7 @@ public class DatabaseHandler {
     private void createItems() 
     {
         items[0] = new ItemDTO(100, "Tvål", new BigDecimal("24.90"), 25, AmountENUM.NUMBER);
-        items[1] = new ItemDTO(101, "Potatis", new BigDecimal("24.90"), 6, AmountENUM.WEIGHT);
+        items[1] = new ItemDTO(101, "Potatis", new BigDecimal("7.90"), 6, AmountENUM.WEIGHT);
         items[2] = new ItemDTO(102, "Tidning", new BigDecimal("15"), 6, AmountENUM.NUMBER);
         items[3] = new ItemDTO(103, "Stekpanna", new BigDecimal("249"), 12, AmountENUM.NUMBER);
         items[4] = new ItemDTO(104, "Läsk", new BigDecimal("19.90"), 12, AmountENUM.NUMBER);
