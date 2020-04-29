@@ -1,6 +1,8 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration;
 
+import java.math.BigDecimal;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.AmountENUM;
 
 /**
  * Handling the communication to the different databeses.
@@ -35,11 +37,6 @@ public class DatabaseHandler {
             return null;
     }
 
-    private void createItems() 
-    {
-        //TODO
-    }
-
     /**
      * Gets the stores information
      * @return store information
@@ -58,6 +55,24 @@ public class DatabaseHandler {
     public void reportSale(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) 
     {
         System.out.println("\nResultat raporterade.");
+    }
+    
+    
+    
+    
+    private void createItems() 
+    {
+        items[0] = new ItemDTO(100, "Tvål", new BigDecimal("24.90"), 25, AmountENUM.NUMBER);
+        items[1] = new ItemDTO(101, "Potatis", new BigDecimal("24.90"), 6, AmountENUM.WEIGHT);
+        items[2] = new ItemDTO(102, "Tidning", new BigDecimal("15"), 6, AmountENUM.NUMBER);
+        items[3] = new ItemDTO(103, "Stekpanna", new BigDecimal("249"), 12, AmountENUM.NUMBER);
+        items[4] = new ItemDTO(104, "Läsk", new BigDecimal("19.90"), 12, AmountENUM.NUMBER);
+        
+        items[5] = new ItemDTO(105, "Soppa", new BigDecimal("29.90"), 6, AmountENUM.NUMBER);
+        items[6] = new ItemDTO(106, "Salad", new BigDecimal("14.90"), 25, AmountENUM.WEIGHT);
+        items[7] = new ItemDTO(107, "Glass", new BigDecimal("34.90"), 12, AmountENUM.NUMBER);
+        items[8] = new ItemDTO(108, "Mjölk", new BigDecimal("11.50"), 6, AmountENUM.NUMBER);
+        items[9] = new ItemDTO(109, "Godis", new BigDecimal("79.90"), 25, AmountENUM.WEIGHT);
     }
     
 }
