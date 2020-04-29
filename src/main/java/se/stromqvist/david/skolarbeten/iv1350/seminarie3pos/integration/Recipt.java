@@ -88,6 +88,8 @@ class Recipt {
         else
             sb.append("/st");
         
+        sb.append("\t").append(item.priceForAllItems).append("kr");
+        
         return sb.toString();
     }
 }
