@@ -23,6 +23,6 @@ public class Printer {
     public void printRecipt(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) 
     {
         Recipt recipt = new Recipt(saleInfo, storeInfo);
-        System.out.println(recipt.toString());
+        System.out.println(recipt.createReciptString());
     }
 }

@@ -35,14 +35,28 @@ class Recipt {
     }
     
     
-    
-    private String createReciptString(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo)
+    /**
+     * Formats and returns a string that can be printed.
+     * @return returns a string representing the recipt
+     */
+     String createReciptString()
     {
-        StringBuilder reciptString = new StringBuilder();
-        addLine(storeInfo.storeName, reciptString);
-        addLine(storeInfo.adress, reciptString);
+        StringBuilder sb = new StringBuilder();
+        sb.append("RECIEPT\n");
+        sb.append(storeName).append("\n");
+        sb.append(adress).append("\n");
+        sb.append("Sale Date: ").append(timeOfSale).append("\n");
+        sb.append("\n\n");
+        items.forEach((item) -> 
+        {
+            sb.append(item).append("\n");
+        });
         
-        return reciptString.toString();
+        sb.append("\nTotal: ").append(saleTotal).append("kr\n");
+        sb.append("Where VAT is: ").append(saleVAT).append("kr\n\n");
+        sb.append("Payed: ").append(payment).append("kr\n");
+        sb.append("Change: ").append(change).append("kr");
+        return sb.toString();
     }
     
     private void addItems(SoldItemDTO[] items)
