@@ -11,7 +11,7 @@ import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 public class DatabaseHandler {
     
     private final static int MAX_NUMBER_OF_ITEMS = 10;
-    private ItemDTO[] items;
+    private final ItemDTO[] items;
     
     public DatabaseHandler()
     {
@@ -38,6 +38,14 @@ public class DatabaseHandler {
     private void createItems() 
     {
         //TODO
+    }
+
+    public StoreInfoDTO getStoreInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void reportSale(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

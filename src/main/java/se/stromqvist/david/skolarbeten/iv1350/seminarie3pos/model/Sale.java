@@ -2,8 +2,8 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.ItemDTO;
-import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.Amount;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
 /**
  * Keeps track of items, time for start of sale, price and VAT of the ongoing sale.
@@ -37,5 +37,19 @@ public class Sale {
     public void addItem(ItemDTO itemToAdd, Amount amount)
     {
         basket.addItem(itemToAdd, amount);
+    }
+
+    public SaleInfoDTO getFinalSaleInfo(BigDecimal payment, BigDecimal change) 
+    {
+        Item[] items = basket.getItemArray();
+        SoldItemDTO[] soldItems = new SoldItemDTO[items.length];
+        for (int i = 0; i < items.length; i++)
+        {
+            soldItems[i] = items[i].getSoldItemDTO();
+        }
+        SaleInfoDTO saleInfo;
+        saleInfo = new SaleInfoDTO(soldItems, basket.getTotalPrice(), basket.getTotalVAT(),
+                basket.getTotalPriceWithoutVAT(), timeOfSale, payment, change);
+        return saleInfo;
     }
 }

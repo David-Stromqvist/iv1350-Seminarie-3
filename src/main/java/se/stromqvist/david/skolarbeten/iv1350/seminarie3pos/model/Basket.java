@@ -46,6 +46,8 @@ class Basket {
         return price.multiply(amountToMultiply);
     }
 
+    
+    
     private void increaseTotalVATandPrice(BigDecimal price, double vatRate, Amount amount)
     {
         BigDecimal newPriceIncrease = calculatePrice(price, amount);
@@ -56,11 +58,14 @@ class Basket {
         totalPrice = totalPrice.add(newPriceIncrease);
     }
 
+    
+    
     private BigDecimal calculateNewVATIncrease(BigDecimal newPriceIncrease, double vatRate)
     {
         BigDecimal VATRateIncrease = BigDecimal.valueOf(vatRate/100);
         return newPriceIncrease.multiply(VATRateIncrease);
     }
+    
     
     BigDecimal getTotalPrice()
     {

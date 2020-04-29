@@ -49,5 +49,10 @@ class Item {
         return item.VATrate;
     }
     
+    SoldItemDTO getSoldItemDTO()
+    {
+        return new SoldItemDTO(item, amount);
+    }
+    
 
 }
