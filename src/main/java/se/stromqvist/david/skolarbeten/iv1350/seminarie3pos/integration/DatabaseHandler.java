@@ -40,12 +40,24 @@ public class DatabaseHandler {
         //TODO
     }
 
-    public StoreInfoDTO getStoreInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Gets the stores information
+     * @return store information
+     */
+    public StoreInfoDTO getStoreInfo() 
+    {
+        return new StoreInfoDTO();
     }
 
-    public void reportSale(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Reports the sale to external databases for leagal reasoning
+     * and inventory manegment.
+     * @param saleInfo inormation about the sale.
+     * @param storeInfo the store the sale happened at.
+     */
+    public void reportSale(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) 
+    {
+        System.out.println("\nResultat raporterade.");
     }
     
 }
