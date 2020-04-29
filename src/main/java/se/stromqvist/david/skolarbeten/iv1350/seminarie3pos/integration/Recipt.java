@@ -1,5 +1,6 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration;
 
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
@@ -10,6 +11,7 @@ import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.AmountENUM;
  * @author David
  */
 class Recipt {
+    private final String dateOfSale;
     private final String timeOfSale;
     private final String storeName;
     private final String adress;
@@ -22,7 +24,8 @@ class Recipt {
     
     Recipt(SaleInfoDTO saleInfo, StoreInfoDTO storeInfo) 
     {
-        timeOfSale = saleInfo.timeOfSale.toString();
+        dateOfSale = DateTimeFormatter.ISO_LOCAL_DATE.format(saleInfo.timeOfSale);
+        timeOfSale = DateTimeFormatter.ISO_LOCAL_TIME.format(saleInfo.timeOfSale.withNano(0));
         storeName = storeInfo.storeName;
         adress = storeInfo.adress;
         saleTotal = saleInfo.totalPrice.toString();
@@ -45,7 +48,8 @@ class Recipt {
         sb.append("RECIEPT\n");
         sb.append(storeName).append("\n");
         sb.append(adress).append("\n");
-        sb.append("Sale Date: ").append(timeOfSale).append("\n");
+        sb.append("Sale Date: ").append(dateOfSale).append("\n");
+        sb.append("Sale Time: ").append(timeOfSale).append("\n");
         sb.append("\n\n");
         items.forEach((item) -> 
         {
@@ -88,7 +92,7 @@ class Recipt {
         else
             sb.append("/st");
         
-        sb.append("\t").append(item.priceForAllItems).append("kr");
+        sb.append("\n\t\t\t").append(item.priceForAllItems).append("kr");
         
         return sb.toString();
     }
