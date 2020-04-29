@@ -1,6 +1,7 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
@@ -51,19 +52,19 @@ class Basket {
     private void increaseTotalVATandPrice(BigDecimal price, double vatRate, Amount amount)
     {
         BigDecimal newPriceIncrease = calculatePrice(price, amount);
-        totalPriceWithoutVAT = totalPriceWithoutVAT.add(newPriceIncrease);
-        BigDecimal newVATIncrease = calculateNewVATIncrease(newPriceIncrease, vatRate);
-        totalVAT = totalVAT.add(newVATIncrease);
-        totalPrice = totalPrice.add(newVATIncrease);
         totalPrice = totalPrice.add(newPriceIncrease);
+        BigDecimal newPriceWithoutVATIncrease = calculateNewPriceWithoutVATIncrease(newPriceIncrease, vatRate);
+        totalPriceWithoutVAT = totalPriceWithoutVAT.add(newPriceWithoutVATIncrease);
+        BigDecimal newVATIncrease = newPriceIncrease.subtract(newPriceWithoutVATIncrease);
+        totalVAT = totalVAT.add(newVATIncrease);
     }
 
     
     
-    private BigDecimal calculateNewVATIncrease(BigDecimal newPriceIncrease, double vatRate)
+    private BigDecimal calculateNewPriceWithoutVATIncrease(BigDecimal newPriceIncrease, double vatRate)
     {
-        BigDecimal VATRateIncrease = BigDecimal.valueOf(vatRate/100);
-        return newPriceIncrease.multiply(VATRateIncrease);
+        BigDecimal VATRateIncrease = BigDecimal.valueOf(vatRate/100).add(new BigDecimal("1"));
+        return newPriceIncrease.divide(VATRateIncrease, 6, RoundingMode.HALF_UP);
     }
     
     
