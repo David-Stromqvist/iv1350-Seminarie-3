@@ -3,7 +3,7 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
 /**
- *
+ * A DTO representing a quantity of a specific item.
  * @author David
  */
 public class SoldItemDTO {

@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 /**
- *
+ * DTO representing a completed sale
  * @author David
  */
 public class SaleInfoDTO {

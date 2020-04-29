@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
 /**
- *
+ * An DTO representing an item.
  * @author David
  */
 public class ItemDTO {
