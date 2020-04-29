@@ -1,6 +1,7 @@
 package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
@@ -39,9 +40,22 @@ class Item {
         return amount;
     }
     
+    /**
+     * 
+     * @return the price as defined for a specific quantity of this item
+     */
     BigDecimal getPrice()
     {
         return item.price;
+    }
+    
+    /**
+     * 
+     * @return the price for all amounts of this item.
+     */
+    BigDecimal getTotalPrice()
+    {
+        return item.price.multiply(BigDecimal.valueOf(amount.getAmount()));
     }
     
     double getVATRate()
@@ -51,7 +65,7 @@ class Item {
     
     SoldItemDTO getSoldItemDTO()
     {
-        return new SoldItemDTO(item, amount);
+        return new SoldItemDTO(item, amount, getTotalPrice());
     }
     
 
