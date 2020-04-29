@@ -3,6 +3,7 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration;
 import java.util.LinkedList;
 import java.util.List;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.AmountENUM;
 
 /**
  * Used to foramt sale information into a string that can be printed.
@@ -30,6 +31,7 @@ class Recipt {
         change = saleInfo.change.toString();
         
         items = new LinkedList<>();
+        addItems(saleInfo.items);
     }
     
     
@@ -43,14 +45,26 @@ class Recipt {
         return reciptString.toString();
     }
     
-    private void addItem(SoldItemDTO item, StringBuilder reciptString)
+    private void addItems(SoldItemDTO[] items)
     {
-        
+        for(SoldItemDTO item : items){
+             this.items.add(itemAsString(item));
+        }
     }
-    
-    private void addLine(String lineToAdd, StringBuilder reciptString)
+        
+    private String itemAsString(SoldItemDTO item)
     {
+        StringBuilder sb = new StringBuilder();
+        String quantity = String.format("%.2f", item.amount.getAmount());
+        sb.append(quantity);
+        if (item.item.getType() == AmountENUM.WEIGHT)
+            sb.append(" kg");
+        sb.append(" - ");
+        sb.append(item.item.itemDescription).append(" - ");
+        sb.append(item.item.price.toString()).append("kr");
+        if (item.item.getType() == AmountENUM.WEIGHT)
+            sb.append("/kg");
         
+        return sb.toString();
     }
-    
 }
