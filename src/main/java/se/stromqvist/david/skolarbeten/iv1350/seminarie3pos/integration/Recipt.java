@@ -53,9 +53,10 @@ class Recipt {
         });
         
         sb.append("\nTotal: ").append(saleTotal).append("kr\n");
-        sb.append("Where VAT is: ").append(saleVAT).append("kr\n\n");
+        sb.append("Of wich VAT is: ").append(saleVAT).append("kr\n\n");
         sb.append("Payed: ").append(payment).append("kr\n");
         sb.append("Change: ").append(change).append("kr");
+        sb.append("\n\n");
         return sb.toString();
     }
     
@@ -69,15 +70,23 @@ class Recipt {
     private String itemAsString(SoldItemDTO item)
     {
         StringBuilder sb = new StringBuilder();
-        String quantity = String.format("%.2f", item.amount.getAmount());
-        sb.append(quantity);
+        
         if (item.item.getType() == AmountENUM.WEIGHT)
-            sb.append(" kg");
+        {
+            sb.append(String.format("%.2f", item.amount.getAmount()));
+            sb.append("kg");
+        }
+        else
+        {
+            sb.append(String.format("%.0f", item.amount.getAmount()));
+        }
         sb.append(" - ");
         sb.append(item.item.itemDescription).append(" - ");
-        sb.append(item.item.price.toString()).append("kr");
+        sb.append(item.item.price.toString()).append(" kr");
         if (item.item.getType() == AmountENUM.WEIGHT)
             sb.append("/kg");
+        else
+            sb.append("/st");
         
         return sb.toString();
     }
