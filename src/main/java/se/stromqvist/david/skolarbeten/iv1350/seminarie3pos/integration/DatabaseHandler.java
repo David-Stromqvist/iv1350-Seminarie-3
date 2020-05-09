@@ -28,13 +28,19 @@ public class DatabaseHandler {
      * @return the itemDTO coresponding to item identifier.
      * @throws InvalidItemIdentifierException if the entered item identifier is not valid for an item in the database.
      */
-    public ItemDTO getItem(int itemIdentifier) throws InvalidItemIdentifierException
+    public ItemDTO getItem(int itemIdentifier)
+            throws InvalidItemIdentifierException, ExternalDataBaseException
     {
-        int itemNR = itemIdentifier - 100;
-        if ( !(itemNR < MAX_NUMBER_OF_ITEMS && 0 <= itemNR) )
-            throw new InvalidItemIdentifierException(itemNR);
+        if (itemIdentifier == 0)
+            throw new ExternalDataBaseException("No connection with the database.");
         else
-            return items[itemNR];
+        {
+            int itemNR = itemIdentifier - 100;
+            if ( !(itemNR < MAX_NUMBER_OF_ITEMS && 0 <= itemNR) )
+                throw new InvalidItemIdentifierException(itemNR + 100);
+            else
+                return items[itemNR];
+        }
     }
 
     /**
