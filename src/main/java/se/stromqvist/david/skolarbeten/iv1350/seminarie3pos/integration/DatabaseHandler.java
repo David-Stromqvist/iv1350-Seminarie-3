@@ -22,19 +22,19 @@ public class DatabaseHandler {
     }
 
     /**
-     * Returns an item DTO based on itemidentifer number.
-     * Null is returned if it isn't a valid number.
+     * Returns an item DTO based on itemidentifer number.Null is returned if it isn't a valid number.
      * 
      * @param itemIdentifier the identification number for an Item
      * @return the itemDTO coresponding to item identifier.
+     * @throws InvalidItemIdentifierException if the entered item identifier is not valid for an item in the database.
      */
-    public ItemDTO getItem(int itemIdentifier) 
+    public ItemDTO getItem(int itemIdentifier) throws InvalidItemIdentifierException
     {
         int itemNR = itemIdentifier - 100;
-        if (itemNR < MAX_NUMBER_OF_ITEMS && 0 <= itemNR)
-            return items[itemNR];
+        if ( !(itemNR < MAX_NUMBER_OF_ITEMS && 0 <= itemNR) )
+            throw new InvalidItemIdentifierException(itemNR);
         else
-            return null;
+            return items[itemNR];
     }
 
     /**
