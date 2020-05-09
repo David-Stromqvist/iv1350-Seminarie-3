@@ -2,8 +2,13 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.view;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.Controller;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.ExternalSystemException;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.InvalidItemTypeException;
+import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.InvalidItemIdentifierException;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
 /**
@@ -14,10 +19,12 @@ import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 public class View {
     
     private final Controller controller;
+    private final ExceptionMessageHandler exceptionMessageHandler;
     
     public View (Controller controller)
     {
         this.controller = controller;
+        exceptionMessageHandler = new ExceptionMessageHandler();
     }
     
     
@@ -28,35 +35,62 @@ public class View {
      */
     public void runPointOfSale()
     {
-        BigDecimal price;
+        BigDecimal price = new BigDecimal("0.00");
         System.out.println("Start of sale");
         controller.startNewSale();
         
         System.out.println("Adding item nr 1");
-        price = controller.addItem(100);
+        try 
+        {
+            price = controller.addItem(100);
+        } 
+        catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
         System.out.println(price);
         
         System.out.println("Adding item nr 2");
-        price = controller.addItem(101, 10);
+        try {
+            price = controller.addItem(101, 10);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
         System.out.println(price);
         
         System.out.println("Adding item nr 3");
-        price = controller.addItem(101, new Amount(10, AmountENUM.WEIGHT));
+        try {
+            price = controller.addItem(101, new Amount(10, AmountENUM.WEIGHT));
+        } catch (InvalidItemIdentifierException | ExternalSystemException | InvalidItemTypeException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
         System.out.println(price);
         
         System.out.println("Adding item nr 4");
-        price = controller.addItem(107, 2);
+        try {
+            price = controller.addItem(107, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
         System.out.println(price);
         
         System.out.println("Adding item nr 5");
-        price = controller.addItem(109, 0.58);
+        try {
+            price = controller.addItem(109, 0.58);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
         System.out.println(price);
         
         price = controller.endSale().setScale(0, RoundingMode.HALF_UP);
         System.out.println(price.setScale(2));
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
-        System.out.println("end of recipt\n\n" + sale.change + " change");
+        System.out.println("end of recipt\n\n" + sale.change + "kr change");
         
     }
     

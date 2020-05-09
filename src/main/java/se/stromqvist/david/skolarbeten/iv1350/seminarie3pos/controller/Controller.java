@@ -25,6 +25,7 @@ public class Controller {
      * 
      * @param database the database used for items and external reporting.
      * @param printer the printer used for printing the recipt.
+     * @throws java.io.IOException if log file couldn't be created
      */
     public Controller (DatabaseHandler database, Printer printer) throws IOException
     {
@@ -84,14 +85,15 @@ public class Controller {
      * if the itemIdentifier is not valid for items in the database.
      * @throws se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.ExternalSystemException
      * if there is a problem with connections to external systems.
+     * @throws se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller.InvalidItemTypeException
      */
-    public BigDecimal addItem(int itemIdentifier, Amount amount) throws InvalidItemIdentifierException, ExternalSystemException
+    public BigDecimal addItem(int itemIdentifier, Amount amount) throws InvalidItemIdentifierException, ExternalSystemException, InvalidItemTypeException
     {
         ItemDTO itemToAdd = getItemFromDataBase(itemIdentifier);
         if (itemToAdd.getType() == amount.getType()) 
             currentSale.addItem(itemToAdd, amount);
         else
-            System.out.println("\nWrong type in the amount\n");
+            throw new InvalidItemTypeException(itemIdentifier, amount.getType());
         return currentSale.getTotalPrice();
     }
     
@@ -133,7 +135,8 @@ public class Controller {
     private ItemDTO getItemFromDataBase(int itemIdentifier) throws InvalidItemIdentifierException, ExternalSystemException
     {
         ItemDTO item = null;
-        try {
+        try 
+        {
             item = database.getItem(itemIdentifier);
         } 
         catch (InvalidItemIdentifierException ex)
