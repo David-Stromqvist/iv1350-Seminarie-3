@@ -39,6 +39,7 @@ public class View {
         System.out.println("Start of sale");
         controller.startNewSale();
         
+        
         System.out.println("Adding item nr 1");
         try 
         {
@@ -50,6 +51,7 @@ public class View {
         }
         System.out.println(price);
         
+        
         System.out.println("Adding item nr 2");
         try {
             price = controller.addItem(101, 10);
@@ -59,10 +61,30 @@ public class View {
         }
         System.out.println(price);
         
+        
         System.out.println("Adding item nr 3");
         try {
             price = controller.addItem(101, new Amount(10, AmountENUM.WEIGHT));
         } catch (InvalidItemIdentifierException | ExternalSystemException | InvalidItemTypeException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        
+        System.out.println("Adding item nr 4, database error");
+        try {
+            price = controller.addItem(0, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        System.out.println("Adding item nr 4, faulty identifier");
+        try {
+            price = controller.addItem(97, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
         {
             exceptionMessageHandler.showExceptionMessage(ex);
         }
@@ -76,6 +98,7 @@ public class View {
             exceptionMessageHandler.showExceptionMessage(ex);
         }
         System.out.println(price);
+        
         
         System.out.println("Adding item nr 5");
         try {
