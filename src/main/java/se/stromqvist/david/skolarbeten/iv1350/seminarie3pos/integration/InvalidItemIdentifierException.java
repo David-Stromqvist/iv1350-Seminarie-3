@@ -19,7 +19,7 @@ public class InvalidItemIdentifierException extends Exception
      * Returns the invalid item identifern.
      * @return the int value of the invalid item Identifiern.
      */
-    public int itemIdentifier()
+    public int getItemIdentifier()
     {
         return invalidItemIdentifier;
     }
