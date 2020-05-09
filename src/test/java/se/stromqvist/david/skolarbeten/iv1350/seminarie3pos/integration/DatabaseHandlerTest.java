@@ -37,21 +37,47 @@ public class DatabaseHandlerTest {
 
     @Test
     public void testGetItemRight() {
-        System.out.println("getItem");
-        int itemIdentifier = 100;
-        ItemDTO expResult = new ItemDTO(itemIdentifier, itemDescription, price, VATrate, type);
-        ItemDTO result = instance.getItem(itemIdentifier);
-        assertEquals(expResult.itemIdentifier, result.itemIdentifier);
-        assertEquals(expResult.itemDescription, result.itemDescription);
+        try {
+            System.out.println("getItem");
+            int itemIdentifier = 100;
+            ItemDTO expResult = new ItemDTO(itemIdentifier, itemDescription, price, VATrate, type);
+            ItemDTO result = instance.getItem(itemIdentifier);
+            assertEquals(expResult.itemIdentifier, result.itemIdentifier);
+            assertEquals(expResult.itemDescription, result.itemDescription);
+        } catch (InvalidItemIdentifierException | ExternalDataBaseException ex) {
+            fail("Something went wrong");
+        }
     }
 
     @Test
-    public void testGetItemWrong() {
-        System.out.println("getItem");
-        int itemIdentifier = 0;
-        ItemDTO expResult = null;
-        ItemDTO result = instance.getItem(itemIdentifier);
-        assertEquals(expResult, result);
+    public void testGetItemInvalidItemIdentifier() {
+        try {
+            System.out.println("getItem");
+            int itemIdentifier = 5;
+            ItemDTO expResult = null;
+            ItemDTO result = instance.getItem(itemIdentifier);
+            fail("Got a result");
+        } catch (InvalidItemIdentifierException ex) {
+            assertTrue(ex.getItemIdentifier() == 5, "Error message shows wrong message");
+        } catch (ExternalDataBaseException ex) {
+            fail("Something went wrong.");
+        }
+    }
+
+    
+    @Test
+    public void testGetItemNoDatabaseConnection() {
+        try {
+            System.out.println("getItem");
+            int itemIdentifier = 0;
+            ItemDTO expResult = null;
+            ItemDTO result = instance.getItem(itemIdentifier);
+            fail("Got a result");
+        } catch (InvalidItemIdentifierException ex) {
+            fail("Something went wrong.");
+        } catch (ExternalDataBaseException ex) {
+            assertTrue(ex.getMessage().contains("connection with"), "Error message shows wrong message");
+        }
     }
     
 }
