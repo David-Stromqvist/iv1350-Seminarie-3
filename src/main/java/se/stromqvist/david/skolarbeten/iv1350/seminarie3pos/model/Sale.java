@@ -3,6 +3,8 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.util.*;
 
@@ -14,6 +16,8 @@ public class Sale {
     
     private final LocalDateTime timeOfSale; 
     private final Basket basket;
+    
+    private final List<FinishedSaleObserver> finishedSaleObserver = new ArrayList<>();
     
     public Sale()
     {
@@ -51,6 +55,33 @@ public class Sale {
         SaleInfoDTO saleInfo;
         saleInfo = new SaleInfoDTO(soldItems, basket.getTotalPrice(), basket.getTotalVAT(),
                 basket.getTotalPriceWithoutVAT(), timeOfSale, payment, change);
+        
+        notifyObservers(saleInfo);
         return saleInfo;
+    }
+
+    private void notifyObservers(SaleInfoDTO saleInfo) {
+        for(FinishedSaleObserver observer : finishedSaleObserver)
+        {
+            observer.saleIsFinished(saleInfo);
+        }
+    }
+    
+    /**
+     * The specified observer will be notified of a finished sale.
+     * @param observer The obser to be notified.
+     */
+    public void addFinishedSaleObserver(FinishedSaleObserver observer)
+    {
+        finishedSaleObserver.add(observer);
+    }
+    
+    /**
+     * The specified observers will be notified of a finished sale.
+     * @param observer The obser to be notified.
+     */
+    public void addFinishedSaleObserver(List<FinishedSaleObserver> observer)
+    {
+        finishedSaleObserver.addAll(observer);
     }
 }

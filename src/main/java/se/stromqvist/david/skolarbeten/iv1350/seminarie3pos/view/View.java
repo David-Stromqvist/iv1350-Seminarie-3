@@ -24,6 +24,7 @@ public class View {
     public View (Controller controller)
     {
         this.controller = controller;
+        controller.addFinishedSaleObserver(new TotalRevenueView());
         exceptionMessageHandler = new ExceptionMessageHandler();
     }
     
@@ -35,6 +36,13 @@ public class View {
      */
     public void runPointOfSale()
     {
+        runFirstSale(); 
+        runSecondSale(); 
+    }
+
+    private void runFirstSale()
+    {
+        System.out.println("First sale");
         BigDecimal price = new BigDecimal("0.00");
         System.out.println("Start of sale");
         controller.startNewSale();
@@ -114,7 +122,91 @@ public class View {
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
         System.out.println("end of recipt\n\n" + sale.change + "kr change");
+    }
+
+    private void runSecondSale()
+    {
+        System.out.println("Second sale");
+        BigDecimal price = new BigDecimal("0.00");
+        System.out.println("Start of sale");
+        controller.startNewSale();
         
+        
+        System.out.println("Adding item nr 1");
+        try 
+        {
+            price = controller.addItem(100);
+        } 
+        catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        
+        System.out.println("Adding item nr 2");
+        try {
+            price = controller.addItem(101, 10);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        
+        System.out.println("Adding item nr 3");
+        try {
+            price = controller.addItem(101, new Amount(10, AmountENUM.WEIGHT));
+        } catch (InvalidItemIdentifierException | ExternalSystemException | InvalidItemTypeException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        
+        System.out.println("Adding item nr 4, database error");
+        try {
+            price = controller.addItem(0, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        System.out.println("Adding item nr 4, faulty identifier");
+        try {
+            price = controller.addItem(97, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        System.out.println("Adding item nr 4");
+        try {
+            price = controller.addItem(107, 2);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        
+        System.out.println("Adding item nr 5");
+        try {
+            price = controller.addItem(109, 0.58);
+        } catch (InvalidItemIdentifierException | ExternalSystemException ex)
+        {
+            exceptionMessageHandler.showExceptionMessage(ex);
+        }
+        System.out.println(price);
+        
+        price = controller.endSale().setScale(0, RoundingMode.HALF_UP);
+        System.out.println(price.setScale(2));
+        
+        SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
+        System.out.println("end of recipt\n\n" + sale.change + "kr change");
+       
     }
     
     

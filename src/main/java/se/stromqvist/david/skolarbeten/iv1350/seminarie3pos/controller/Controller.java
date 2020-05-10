@@ -2,6 +2,8 @@ package se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.DTOs.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.integration.*;
 import se.stromqvist.david.skolarbeten.iv1350.seminarie3pos.model.*;
@@ -20,6 +22,7 @@ public class Controller {
     
     private Sale currentSale;
     private Sale finishedSale;
+    private final List<FinishedSaleObserver> finishedSaleObserver = new ArrayList();
     
     /**
      * 
@@ -42,6 +45,7 @@ public class Controller {
     public void startNewSale()
     {
         currentSale = new Sale();
+        currentSale.addFinishedSaleObserver(finishedSaleObserver);
     }
     
     /**
@@ -150,5 +154,26 @@ public class Controller {
             throw new ExternalSystemException("Could not connect to the inventory system.\nPlease try again.");
         }
         return item;
+    }
+    
+    
+    /**
+     * The specified observer will be notified of a finished sale.
+     * Only sales started after this method is called will be notified.
+     * @param observer The obser to be notified.
+     */
+    public void addFinishedSaleObserver(FinishedSaleObserver observer)
+    {
+        finishedSaleObserver.add(observer);
+    }
+    
+    /**
+     * The specified observers will be notified of a finished sale.
+     * Only sales started after this method is called will be notified.
+     * @param observer The obser to be notified.
+     */
+    public void addFinishedSaleObserver(List<FinishedSaleObserver> observer)
+    {
+        finishedSaleObserver.addAll(observer);
     }
 }

@@ -15,6 +15,7 @@ public class Main {
     /**
      * @param args the command line arguments
      * this program doesn't have any.
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException
     {
