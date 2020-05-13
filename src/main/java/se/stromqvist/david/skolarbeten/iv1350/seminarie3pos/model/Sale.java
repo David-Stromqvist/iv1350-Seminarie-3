@@ -45,7 +45,7 @@ public class Sale {
     }
 
     /**
-     * Used to generate the finale stte of a sale when the sale is closed.
+     * Used to generate the finale state of a sale when the sale is closed.
      * @param payment The amount payed
      * @param change The amount that should be returned as change
      * @return A SaleInfoDTO with all relevant information concerning the sale when it is ended.
