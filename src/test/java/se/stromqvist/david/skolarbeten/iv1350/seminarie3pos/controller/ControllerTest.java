@@ -156,7 +156,7 @@ public class ControllerTest {
                 result = instance.addItem(itemIdentifier, quantity);
                 fail("Something went wrong with item handling");
             } catch (ExternalSystemException ex) {
-                assertTrue(ex.getMessage().contains("connection with"), "Error message shows wrong message");
+                assertTrue(ex.getMessage().contains("Could not connect"), "Error message shows wrong message:" + ex.getMessage());
             } catch (InvalidItemIdentifierException ex) {
                 fail("Wrong Exception");
             }
