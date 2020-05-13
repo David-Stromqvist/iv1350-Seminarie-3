@@ -121,7 +121,7 @@ public class View {
         System.out.println(price.setScale(2));
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
-        System.out.println("\n\n" + sale.change + "kr change");
+        System.out.println("\n" + sale.change + "kr change\n\n");
     }
 
     private void runSecondSale()
@@ -205,7 +205,7 @@ public class View {
         System.out.println(price.setScale(2) + "\n\n********");
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("400.00"));
-        System.out.println("\n\n" + sale.change + "kr change");
+        System.out.println("\n" + sale.change + "kr change\n\n");
        
     }
     
