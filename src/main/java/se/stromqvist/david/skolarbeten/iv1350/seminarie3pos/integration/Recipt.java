@@ -45,7 +45,7 @@ class Recipt {
      String createReciptString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("RECIEPT\n");
+        sb.append("*********RECIEPT*********\n");
         sb.append(storeName).append("\n");
         sb.append(adress).append("\n");
         sb.append("Sale Date: ").append(dateOfSale).append("\n");
@@ -60,7 +60,7 @@ class Recipt {
         sb.append("Of wich VAT is: ").append(saleVAT).append("kr\n\n");
         sb.append("Payed: ").append(payment).append("kr\n");
         sb.append("Change: ").append(change).append("kr");
-        sb.append("\n\n");
+        sb.append("\n\n*****end of recipt*****");
         return sb.toString();
     }
     

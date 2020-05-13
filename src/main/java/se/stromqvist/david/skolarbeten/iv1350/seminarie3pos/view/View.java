@@ -121,7 +121,7 @@ public class View {
         System.out.println(price.setScale(2));
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
-        System.out.println("end of recipt\n\n" + sale.change + "kr change");
+        System.out.println("\n\n" + sale.change + "kr change");
     }
 
     private void runSecondSale()
@@ -135,7 +135,7 @@ public class View {
         System.out.println("Adding item nr 1");
         try 
         {
-            price = controller.addItem(100);
+            price = controller.addItem(102);
         } 
         catch (InvalidItemIdentifierException | ExternalSystemException ex)
         {
@@ -146,7 +146,7 @@ public class View {
         
         System.out.println("Adding item nr 2");
         try {
-            price = controller.addItem(101, 10);
+            price = controller.addItem(106, 15);
         } catch (InvalidItemIdentifierException | ExternalSystemException ex)
         {
             exceptionMessageHandler.showExceptionMessage(ex);
@@ -184,7 +184,7 @@ public class View {
         
         System.out.println("Adding item nr 4");
         try {
-            price = controller.addItem(107, 2);
+            price = controller.addItem(108, 3);
         } catch (InvalidItemIdentifierException | ExternalSystemException ex)
         {
             exceptionMessageHandler.showExceptionMessage(ex);
@@ -202,10 +202,10 @@ public class View {
         System.out.println(price);
         
         price = controller.endSale().setScale(0, RoundingMode.HALF_UP);
-        System.out.println(price.setScale(2));
+        System.out.println(price.setScale(2) + "\n\n********");
         
-        SaleInfoDTO sale = controller.closeSale(new BigDecimal("350.00"));
-        System.out.println("end of recipt\n\n" + sale.change + "kr change");
+        SaleInfoDTO sale = controller.closeSale(new BigDecimal("400.00"));
+        System.out.println("\n\n" + sale.change + "kr change");
        
     }
     

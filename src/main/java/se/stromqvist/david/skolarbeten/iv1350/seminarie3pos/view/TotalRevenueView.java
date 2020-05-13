@@ -20,8 +20,8 @@ public class TotalRevenueView implements FinishedSaleObserver
     @Override
     public void saleIsFinished(SaleInfoDTO saleInfo)
     {
-        totalRevenue = totalRevenue.add(saleInfo.totalPrice).setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Total revenue earned so far today: " + totalRevenue);
+        totalRevenue = totalRevenue.add(saleInfo.totalPrice).setScale(0, RoundingMode.HALF_UP).setScale(2);
+        System.out.println("\nTotal revenue earned so far today: " + totalRevenue);
     }
     
 }
