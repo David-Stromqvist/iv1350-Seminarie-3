@@ -202,7 +202,7 @@ public class View {
         System.out.println(price);
         
         price = controller.endSale().setScale(0, RoundingMode.HALF_UP);
-        System.out.println(price.setScale(2) + "\n\n********");
+        System.out.println(price.setScale(2));
         
         SaleInfoDTO sale = controller.closeSale(new BigDecimal("400.00"));
         System.out.println("\n" + sale.change + "kr change\n\n");
